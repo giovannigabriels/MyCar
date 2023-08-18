@@ -117,7 +117,6 @@ class Controller {
       await car.destroy();
       res.status(200).json({ message: `${car.carName} success to delete` });
     } catch (error) {
-      console.log();
       next(error);
     }
   }
