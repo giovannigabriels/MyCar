@@ -1,3 +1,4 @@
+const { formattedDateToday } = require("../helpers/formattedDate");
 const { User, Car } = require("../models");
 
 class Controller {
@@ -52,6 +53,13 @@ class Controller {
     }
   }
 
+  static async checkPromotionStatus(promotionEndDate) {
+    return promotionEndDate != null &&
+      promotionEndDate > (await formattedDateToday())
+      ? true
+      : false;
+  }
+
   static async addCar(req, res, next) {
     try {
       const {
@@ -63,6 +71,12 @@ class Controller {
         mileage,
         carPicture,
       } = req.body;
+
+      //check for promotionStatus
+      const promotionStatus = await Controller.checkPromotionStatus(
+        promotionEndDate
+      );
+
       const addCar = await Car.create({
         carName,
         promotionEndDate,
@@ -72,6 +86,7 @@ class Controller {
         mileage,
         carPicture,
         userId: req.user.id,
+        promotionStatus,
       });
       res.status(200).json(addCar);
     } catch (error) {
@@ -92,6 +107,12 @@ class Controller {
         mileage,
         carPicture,
       } = req.body;
+
+      //check for promotionStatus
+      const promotionStatus = await Controller.checkPromotionStatus(
+        promotionEndDate
+      );
+
       await car.update({
         carName,
         promotionEndDate,
@@ -100,6 +121,7 @@ class Controller {
         address,
         mileage,
         carPicture,
+        promotionStatus,
       });
       res.status(200).json({ message: `${car.carName} has been updated` });
     } catch (error) {
