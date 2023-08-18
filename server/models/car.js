@@ -78,6 +78,10 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      promotionStatus: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
