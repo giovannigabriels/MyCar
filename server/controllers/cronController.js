@@ -5,7 +5,6 @@ const { Car } = require("../models");
 class Controller {
   static async cronJob() {
     try {
-      console.log("cron job execute");
       const updatedCarsWithPromotion = await Car.update(
         { promotionStatus: false },
         {
