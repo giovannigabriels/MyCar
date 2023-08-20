@@ -52,7 +52,7 @@ export default function DetailPage() {
     });
   };
   useEffect(() => {
-    //fetch data
+    //fetch data ONE CAR
     dispatch(fetchOneCars(id))
       .then((data) => {
         setInput({
@@ -72,6 +72,8 @@ export default function DetailPage() {
       .finally(() => {
         setLoading(false);
       });
+
+    //fetch index CAR COMMENT
     dispatch(fetchCarComment(id))
       .then((data) => {
         setComments(data);
@@ -83,7 +85,6 @@ export default function DetailPage() {
     socket.on("comment", (comment) => {
       if (comment.carId === id) {
         setComments((prevComments) => [...prevComments, comment]);
-        console.log(comment, "masukk socket comment ONN");
       }
     });
   }, []);
