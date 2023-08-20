@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 import { login } from "../store/actions/userAction";
 import Swal from "sweetalert2";
 
@@ -100,6 +100,11 @@ export default function Login() {
               <button className="btn btn-info">Login</button>
             </div>
           </form>
+            <div  className="card-body -mt-5">
+            <div className="form-control">
+              <Link to={"/register"} className="btn">Register</Link>
+            </div>
+            </div>
         </div>
       </div>
     </div>
