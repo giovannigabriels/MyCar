@@ -35,6 +35,7 @@ class Controller {
 
   static async findCar(id) {
     const result = await Car.findOne({
+      include:[User],
       where: {
         id,
       },
