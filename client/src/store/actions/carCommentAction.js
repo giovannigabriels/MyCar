@@ -1,35 +1,32 @@
 
 
 import {
-    CARS_FETCH,
+    CAR_COMMENTS_FETCH,
+    INPUT_CAR_COMMENTS
   } from "./actionTypes";
   
 
   const urlBase = "http://localhost:3000";
   
-  export const carsFetch = (payload) => {
+  export const carCommentFetch = (payload) => {
     return {
-      type: CARS_FETCH,
+      type:CAR_COMMENTS_FETCH,
       payload,
     };
   };
   
-//   export const oneItemFetch = (payload) => {
-//     return {
-//       type: ONE_ITEM_FETCH,
-//       payload,
-//     };
-//   };
   
-  
-  export const fetchCars= () => {
+  export const fetchCarComment= (id) => {
     return (dispatch, getState) => {
-      return fetch(`${urlBase}/car/pub`)
+      return fetch(`${urlBase}/car-comment/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not OK");
           }
           return response.json();
+        })
+        .then((data)=>{
+            dispatch(carCommentFetch(data))
         })
         .catch((error) => {
           console.error(

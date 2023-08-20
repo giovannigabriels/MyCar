@@ -1,4 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
+import DetailPage from "../components/DetailPage";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import Navbar from "../components/Navbar";
@@ -13,10 +14,10 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
       },
-      // {
-      //   path: "detail/:id",
-      //   element: <DetailPage />,
-      // },
+      {
+        path: "detail/:id",
+        element: <DetailPage />,
+      },
     ],
   },
   {
