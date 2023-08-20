@@ -2,7 +2,7 @@
 
 #SERVER
 
-'cd server/'
+`cd server/`
 
 ##Install dependensi dengan menjalankan perintah berikut:
 
@@ -24,7 +24,7 @@ Server akan berjalan pada http://localhost:3000.
 
 #CLIENT
 
-'cd client/'
+`cd client/`
 
 ##Install dependensi dengan menjalankan perintah berikut:
 
