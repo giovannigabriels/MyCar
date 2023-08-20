@@ -8,7 +8,7 @@ import Register from "../components/Register";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar/>,
+    element: <Navbar />,
     children: [
       {
         path: "",
@@ -23,18 +23,18 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    loader:()=>{
-      const access_token = localStorage.getItem("access_token");
-      if (access_token) return redirect("/");
-    }
+    // loader:()=>{
+    //   const access_token = localStorage.getItem("access_token");
+    //   if (access_token) return redirect("/");
+    // }
   },
   {
     path: "/register",
     element: <Register />,
-    loader:()=>{
+    loader: () => {
       const access_token = localStorage.getItem("access_token");
       if (access_token) return redirect("/");
-    }
+    },
   },
 ]);
 
