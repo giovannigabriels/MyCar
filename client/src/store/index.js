@@ -4,9 +4,10 @@ import {
   legacy_createStore as createStore,
 } from "redux";
 import thunk from "redux-thunk";
+import carReducer from "./reduces/carReducer";
 
 const rootReducer = combineReducers({
-  // carReducer,
+  carReducer
   // carCommentReducer,
 });
 
