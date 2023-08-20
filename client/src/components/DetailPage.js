@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchOneCars } from "../store/actions/carAction";
 import {
   addCarComment,
-  carCommentFetch,
   fetchCarComment,
 } from "../store/actions/carCommentAction";
 import BubbleComment from "./BubbleComment";
@@ -81,13 +80,17 @@ export default function DetailPage() {
       .finally(() => {
         setLoading(false);
       });
+  }, []);
 
+  useEffect(() => {
     socket.on("comment", (comment) => {
       if (comment.carId === id) {
         setComments((prevComments) => [...prevComments, comment]);
       }
     });
-  }, []);
+  }, [id]);
+
+
   return (
     <div>
       ß

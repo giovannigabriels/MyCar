@@ -1,4 +1,4 @@
-import { CAR_COMMENTS_FETCH, INPUT_CAR_COMMENTS } from "./actionTypes";
+import { CAR_COMMENTS_FETCH} from "./actionTypes";
 
 const urlBase = "http://localhost:3000";
 
