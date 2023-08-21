@@ -123,7 +123,7 @@ export default function Form() {
           navigate("/my-cars");
         });
     } else {
-      dispatch(putCar(input,id))
+      dispatch(putCar(input, id))
         .then((data) => {
           Swal.fire({
             position: "top",
@@ -247,7 +247,7 @@ export default function Form() {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Set Promotion Date</span>
+              <span className="label-text">Set Promotion End Date</span>
             </label>
             <input
               type="date"

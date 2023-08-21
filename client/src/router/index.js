@@ -19,10 +19,26 @@ const router = createBrowserRouter([
       {
         path: "my-cars/:type/:id",
         element: <Form />,
+        loader: () => {
+          const isLogin = localStorage.getItem("is_login");
+          if (!isLogin){
+            return redirect("/login");
+          } else {
+            return 1
+          }
+        },
       },
       {
         path: "my-cars",
         element: <MyCar />,
+        loader: () => {
+          const isLogin = localStorage.getItem("is_login");
+          if (!isLogin){
+            return redirect("/login");
+          } else {
+            return 1
+          }
+        },
       },
       {
         path: "detail/:id",
