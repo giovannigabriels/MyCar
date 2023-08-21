@@ -76,7 +76,7 @@ export const fetchOneCars = (id) => {
   };
 };
 
-export const addCar= (payload) => {
+export const addCar = (payload) => {
   return (dispatch, getState) => {
     return fetch(`${urlBase}/car`, {
       method: "post",
@@ -96,5 +96,16 @@ export const addCar= (payload) => {
         dispatch(myCarsFetch());
         return data;
       });
+  };
+};
+
+export const deleteMyCar = (id) => {
+  return (dispatch, getState) => {
+    return fetch(`${urlBase}/car/${id}`, {
+      method: "delete",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
   };
 };

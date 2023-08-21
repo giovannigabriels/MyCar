@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { formattedDate, formattedDateInput } from "../helper";
 import { addCar, fetchOneCars } from "../store/actions/carAction";
-import { register } from "../store/actions/userAction";
 
 export default function Form() {
   const { type, id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isLogin } = useSelector((state) => state.userReducer);
 
   let [input, setInput] = useState({
     carName: "",
@@ -26,10 +26,12 @@ export default function Form() {
       ...input,
       [ev.target.name]: ev.target.value,
     });
-    console.log(input.promotionEndDate, "loggggggg");
   };
 
   useEffect(() => {
+    if(!isLogin){
+      navigate("/login")
+    }
     //fetch data ONE CAR
     if (type === "edit") {
       dispatch(fetchOneCars(id))
@@ -64,8 +66,6 @@ export default function Form() {
         .finally(() => {
         });
     }
-
-    console.log(input.promotionEndDate, "input yang masuk");
   }, []);
 
   useEffect(() => {
