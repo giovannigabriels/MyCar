@@ -28,23 +28,23 @@ const router = createBrowserRouter([
         path: "detail/:id",
         element: <DetailPage />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+        loader: () => {
+          const isLogin = localStorage.getItem("is_login");
+          if (isLogin) return redirect("/");
+        },
+      },
+      {
+        path: "/register",
+        element: <Register />,
+        loader: () => {
+          const isLogin = localStorage.getItem("is_login");
+          if (isLogin) return redirect("/");
+        },
+      },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-    // loader:()=>{
-    //   const access_token = localStorage.getItem("access_token");
-    //   if (access_token) return redirect("/");
-    // }
-  },
-  {
-    path: "/register",
-    element: <Register />,
-    loader: () => {
-      const access_token = localStorage.getItem("access_token");
-      if (access_token) return redirect("/");
-    },
   },
 ]);
 

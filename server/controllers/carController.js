@@ -1,5 +1,5 @@
 const { formattedDateToday } = require("../helpers/formattedDate");
-const { User, Car } = require("../models");
+const { User, Car, CarComment } = require("../models");
 
 class Controller {
   static async index(req, res, next) {
@@ -35,7 +35,7 @@ class Controller {
 
   static async findCar(id) {
     const result = await Car.findOne({
-      include:[User],
+      include: [User],
       where: {
         id,
       },
@@ -133,6 +133,11 @@ class Controller {
   static async delete(req, res, next) {
     try {
       let id = +req.params.carId;
+      await CarComment.destroy({
+        where: {
+          carId: id,
+        },
+      });
       const car = await Controller.findCar(id);
       if (!car) {
         throw { name: "data not found" };
