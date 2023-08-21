@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect } from "react-router-dom";
 import DetailPage from "../components/DetailPage";
 import Home from "../components/Home";
 import Login from "../components/Login";
+import MyCar from "../components/MyCar";
 import Navbar from "../components/Navbar";
 import Register from "../components/Register";
 
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "my-cars",
+        element: <MyCar />,
       },
       {
         path: "detail/:id",
