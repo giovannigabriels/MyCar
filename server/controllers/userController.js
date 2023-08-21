@@ -39,7 +39,7 @@ class Controller {
         id: user.id,
       };
       const access_token = createToken(payload);
-      res.status(200).json({ access_token, name:user.name });
+      res.status(200).json({ access_token, name:user.name , id:user.id});
     } catch (error) {
         console.log(error, "errornya");
       next(error);
