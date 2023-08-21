@@ -33,7 +33,11 @@ const router = createBrowserRouter([
         element: <Login />,
         loader: () => {
           const isLogin = localStorage.getItem("is_login");
-          if (isLogin) return redirect("/");
+          if (isLogin){
+            return redirect("/");
+          } else {
+            return 1
+          }
         },
       },
       {
@@ -41,7 +45,11 @@ const router = createBrowserRouter([
         element: <Register />,
         loader: () => {
           const isLogin = localStorage.getItem("is_login");
-          if (isLogin) return redirect("/");
+          if (isLogin){
+            return redirect("/");
+          } else {
+            return 1
+          }
         },
       },
     ],
