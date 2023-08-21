@@ -1,5 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import DetailPage from "../components/DetailPage";
+import Form from "../components/Form";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import MyCar from "../components/MyCar";
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "my-cars/:type/:id",
+        element: <Form />,
       },
       {
         path: "my-cars",

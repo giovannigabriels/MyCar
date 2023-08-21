@@ -75,3 +75,26 @@ export const fetchOneCars = (id) => {
       });
   };
 };
+
+export const addCar= (payload) => {
+  return (dispatch, getState) => {
+    return fetch(`${urlBase}/car`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw response.json();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch(myCarsFetch());
+        return data;
+      });
+  };
+};

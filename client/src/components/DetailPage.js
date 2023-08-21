@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchOneCars } from "../store/actions/carAction";
 import {
@@ -17,6 +17,7 @@ export default function DetailPage() {
   const [comments, setComments] = useState([]);
 
   let [loading, setLoading] = useState(true);
+  let [twoButton, setThreeButton] = useState(false);
   let [inputComment, setInputComment] = useState({
     text: "",
     carId: id,
@@ -54,6 +55,11 @@ export default function DetailPage() {
     //fetch data ONE CAR
     dispatch(fetchOneCars(id))
       .then((data) => {
+        console.log(
+          data.User.id === +localStorage.id_user,
+          data.User.id,
+          localStorage.id_user
+        );
         setInput({
           name: data.carName,
           price: data.price,
@@ -61,6 +67,9 @@ export default function DetailPage() {
           author: data.User.name,
           description: data.description,
         });
+        if (data.User.id === +localStorage.id_user) {
+          setThreeButton(true);
+        }
       })
       .catch((error) => {
         console.error(
@@ -93,7 +102,6 @@ export default function DetailPage() {
 
   return (
     <div>
-      ß
       <div className="bg-yellow-500">
         <p className="  font-bold text-2xl text-white text-center">
           {input.name}
@@ -109,22 +117,32 @@ export default function DetailPage() {
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title  text-red-600 font-semibold">
-                {" "}
+              <h2 className="card-title text-red-600 font-semibold">
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
                 }).format(input.price)}
               </h2>
-              <span>Description : {input.description}</span>
-              <h2 className=" font-bold">Author : {input.author}</h2>
-              <div className="card-actions justify-end">
-                <Link
-                  to={"/"}
-                  className="btn btn-primary">
-                  Back to Home
-                </Link>
-              </div>
+              <span>Description: {input.description}</span>
+              <h2 className="font-bold">Author: {input.author}</h2>
+
+              {twoButton === true ? (
+                <div className="mt-4 flex justify-between">
+                  <Link
+                    to={`/my-cars/edit/${id}`}
+                    className="btn btn-secondary">
+                    Edit
+                  </Link>
+                  <button
+                    className="btn btn-error"
+                    // onClick={handleDelete}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         ) : (
