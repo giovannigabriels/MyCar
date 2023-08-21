@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { formattedDate, formattedDateInput } from "../helper";
-import { addCar, fetchOneCars } from "../store/actions/carAction";
+import { addCar, fetchOneCars, putCar } from "../store/actions/carAction";
 
 export default function Form() {
   const { type, id } = useParams();
@@ -29,8 +29,8 @@ export default function Form() {
   };
 
   useEffect(() => {
-    if(!isLogin){
-      navigate("/login")
+    if (!isLogin) {
+      navigate("/login");
     }
     //fetch data ONE CAR
     if (type === "edit") {
@@ -63,8 +63,7 @@ export default function Form() {
             error
           );
         })
-        .finally(() => {
-        });
+        .finally(() => {});
     }
   }, []);
 
@@ -96,32 +95,61 @@ export default function Form() {
       ...input,
       promotionEndDate: formattedDateInput(input.promotionEndDate),
     });
-    dispatch(addCar(input))
-      .then((data) => {
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: `Success add ${data.carName}`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((error) => {
-        return error;
-      })
-      .then((data) => {
-        if (data) {
+    if (type === "create") {
+      dispatch(addCar(input))
+        .then((data) => {
           Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `${data.message}`,
-            confirmButtonText: "Try again",
+            position: "top",
+            icon: "success",
+            title: `Success add ${data.carName}`,
+            showConfirmButton: false,
+            timer: 1500,
           });
-        }
-      })
-      .finally(() => {
-        navigate("/my-cars");
-      });
+        })
+        .catch((error) => {
+          return error;
+        })
+        .then((data) => {
+          if (data) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: `${data.message}`,
+              confirmButtonText: "Try again",
+            });
+          }
+        })
+        .finally(() => {
+          navigate("/my-cars");
+        });
+    } else {
+      dispatch(putCar(input,id))
+        .then((data) => {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: `Success edit ${data.carName}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          return error;
+        })
+        .then((data) => {
+          if (data) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: `${data.message}`,
+              confirmButtonText: "Try again",
+            });
+          }
+        })
+        .finally(() => {
+          navigate("/my-cars");
+        });
+    }
   };
   return (
     <div className="hero min-h-screen bg-base-200">

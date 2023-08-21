@@ -106,6 +106,24 @@ export const deleteMyCar = (id) => {
       headers: {
         access_token: localStorage.access_token,
       },
-    })
+    });
+  };
+};
+
+export const putCar = (payload, id) => {
+  return (dispatch, getState) => {
+    return fetch(`${urlBase}/car/${id}`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    }).then((response) => {
+      if (!response.ok) {
+        throw response.json();
+      }
+      return response.json();
+    });
   };
 };

@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMyCar, fetchMyCars, fetchOneCars } from "../store/actions/carAction";
+import {
+  deleteMyCar,
+  fetchMyCars,
+  fetchOneCars,
+} from "../store/actions/carAction";
 import Swal from "sweetalert2";
 import {
   addCarComment,
@@ -75,7 +79,7 @@ export default function DetailPage() {
               timer: 1500,
             });
             dispatch(fetchMyCars());
-            navigate("/my-cars")
+            navigate("/my-cars");
           })
 
           .catch((error) => {
@@ -144,10 +148,11 @@ export default function DetailPage() {
   useEffect(() => {
     socket.on("comment", (comment) => {
       if (comment.carId === id) {
-        setComments((prevComments) => [...prevComments, comment]);
+        const allComment = [...comments, comment];
+        setComments(allComment);
       }
     });
-  }, [id]);
+  }, [comments]);
 
   return (
     <div>

@@ -64,13 +64,15 @@ export default function Navbar() {
             <li>
               <button
                 to={"/my-cars/create/0"}
-                onClick={handleJualMobil}>
+                onClick={handleJualMobil}
+                className={"mx-2"}
+                >
                 Jual Mobil
               </button>
             </li>
             {isLogin ? (
               <li>
-                <Link to={"/my-cars"}>My Cars</Link>
+                <Link to={"/my-cars"} className="mx-2">My Cars</Link>
               </li>
             ) : (
               ""
